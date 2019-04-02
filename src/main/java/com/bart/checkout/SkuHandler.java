@@ -5,12 +5,14 @@ import java.util.*;
 
 public class SkuHandler {
 
+    public static String DEFAULT_PRICING_RULE = "A, 1, 50, 3, 130; B, 1, 30, 2, 45; C, 1, 20; D, 1, 15";
     private static Map<String, Integer> products;                       //SKU -> Number of items
     private static Map<String, Map<Integer, BigDecimal>> pricing;       //SKU -> (Units -> Price)
 
     static {
         products = new HashMap<>();
         pricing = new HashMap<>();
+        scanPricingRules(DEFAULT_PRICING_RULE);
     }
 
     public static void scanProduct(String sku) {
@@ -54,11 +56,15 @@ public class SkuHandler {
 
     private static void calculateCombinations(List<Integer> numbers, int count, List<Integer> partial, List<List<Integer>> combinations) {
         int s = 0;
-        for (int x : partial) s += x;
+        for (int x : partial) {
+            s += x;
+        }
         if (s == count) {
             combinations.add(new ArrayList<>(partial));
         }
-        if (s >= count) return;
+        if (s >= count) {
+            return;
+        }
         for(int i=0;i<numbers.size();i++) {
             int n = numbers.get(i);
             ArrayList<Integer> partialRec = new ArrayList<>(partial);

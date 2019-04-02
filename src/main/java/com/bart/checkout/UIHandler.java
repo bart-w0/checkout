@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class UIHandler {
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static String DEFAULT_PRICING_RULE = "A, 1, 50, 3, 130; B, 1, 30, 2, 45; C, 1, 20; D, 1, 15";
 
     public static void printWelcome() {
         System.out.println("Welcome in Simple Checkout application!");
@@ -17,6 +16,7 @@ public class UIHandler {
     }
 
     public static String printMenu() {
+        System.out.println("");
         System.out.println("Please select option:");
         System.out.println("1) Scan product");
         System.out.println("2) Reset / new customer");
@@ -48,7 +48,7 @@ public class UIHandler {
         System.out.println("Pricing rules: (empty for default)");
         String pricingRules = keyboard.nextLine();
         if(pricingRules.equals("")) {
-            pricingRules = DEFAULT_PRICING_RULE;
+            pricingRules = SkuHandler.DEFAULT_PRICING_RULE;
         }
         return pricingRules;
     }
